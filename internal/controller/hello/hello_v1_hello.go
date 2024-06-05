@@ -26,12 +26,23 @@ func (c *ControllerV1) Hello(ctx context.Context, req *v1.HelloReq) (res *v1.Hel
 		message = err.Error()
 	}
 
+	// 读取自定义配置文件
+	g.Cfg().GetAdapter().(*gcfg.AdapterFile).SetFileName("local.yaml")
+
+	// 后面读取的配置都是从 local.yaml 中读取
+	mysqlConfig, err := g.Cfg().Get(ctx, "mysql")
+
+	if err != nil {
+		message = err.Error()
+	}
+
 	g.RequestFromCtx(ctx).Response.WriteJson(g.Map{
 		"code":    http.StatusOK,
 		"message": message,
 		"data": g.Map{
 			"name":    name,
 			"version": version,
+			"mysql":   mysqlConfig,
 		},
 	})
 	return
