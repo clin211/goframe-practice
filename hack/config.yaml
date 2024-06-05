@@ -6,6 +6,6 @@ gfcli:
     build: "-a amd64 -s linux -p temp -ew"
     tagPrefixes:
       - my.image.pub/my-app
-
+viewpath: "/home/www/templates/"
 app:
   name: my-app
