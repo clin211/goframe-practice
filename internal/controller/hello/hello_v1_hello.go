@@ -2,11 +2,11 @@ package hello
 
 import (
 	"context"
-	"fmt"
 	"net/http"
 
 	"github.com/gogf/gf/v2/frame/g"
 	"github.com/gogf/gf/v2/os/gcfg"
+	"github.com/gogf/gf/v2/os/glog"
 
 	v1 "myapp/api/hello/v1"
 )
@@ -14,7 +14,6 @@ import (
 func (c *ControllerV1) Hello(ctx context.Context, req *v1.HelloReq) (res *v1.HelloRes, err error) {
 	// 使用 g.Cfg() 获取配置
 	name, err := g.Cfg().Get(ctx, "app.name")
-	fmt.Println("name: ", name)
 	message := "success"
 	if err != nil {
 		message = err.Error()
@@ -35,6 +34,14 @@ func (c *ControllerV1) Hello(ctx context.Context, req *v1.HelloReq) (res *v1.Hel
 	if err != nil {
 		message = err.Error()
 	}
+
+	// 打印日志
+	logger := glog.New()
+	logger.Infof(ctx, "mysql config: %v", mysqlConfig)
+
+	// 设置日志等级
+	logger.SetLevel(glog.LEVEL_ALL | glog.LEVEL_INFO)
+	logger.Infof(ctx, "version: %v", version)
 
 	g.RequestFromCtx(ctx).Response.WriteJson(g.Map{
 		"code":    http.StatusOK,
