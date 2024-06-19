@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  redis:
+    image: redis
+    restart: always
+    container_name: "redis"
+    ports:
+      - 15001:6379
+    volumes:
+      - ./data/redis:/data
+    command: ["redis-server", "--requirepass", "123456"]
