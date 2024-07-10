@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板标签</title>
+</head>
+
+<body>
+    <h2> 模板中支持的 Go 符号</h2>
+    <ul>
+        <li>${"string"} // 一般 string</li>
+        <li>${`raw string`} // 原始 string</li>
+        <li>${'c'} // byte</li>
+        <li>${print nil} // nil 也被支持</li>
+    </ul>
+
+    <h2> 模板中的判断</h2>
+    <p>
+        ${if .Name}
+        hello ${.Name}
+        ${else}
+        default name
+        ${end}
+    </p>
+
+    <h3>判断嵌套示例</h3>
+    ${if .User}
+    <p>用户名: ${.User.Name}</p>
+    ${if .User.Admin}
+    <p>角色: 管理员</p>
+    ${else}
+    <p>角色: 普通用户</p>
+    ${end}
+    ${else}
+    <p>用户未登录</p>
+    ${end}
+
+    <h2>用户列表</h2>
+    <ul>
+        ${range .users}
+        <li>
+            名字: ${.Name}, 年龄: ${.Age}
+            ${if .Admin}
+            (管理员)
+            ${end}
+        </li>
+        ${else}
+        <li>没有用户</li>
+        ${end}
+    </ul>
+
+    <h2>用户信息</h2>
+    ${with .user}
+    <p>名字: ${.Name}</p>
+    <p>年龄: ${.Age}</p>
+    ${if .Admin}
+    <p>角色: 管理员</p>
+    ${else}
+    <p>角色: 普通用户</p>
+    ${end}
+    ${else}
+    <p>用户不存在</p>
+    ${end}
+
+    <h2>模板中的应用</h2>
+    ${template "header" .}
+
+    <section>
+        <!-- 其他页面内容 -->
+    </section>
+</body>
+
+</html>
