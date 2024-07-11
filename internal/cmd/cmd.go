@@ -70,6 +70,13 @@ var (
 					},
 				})
 			})
+
+			s.BindHandler("/func", func(r *ghttp.Request) {
+				r.Response.WriteTpl("template-func.html", g.Map{
+					"LoggedIn": true,
+					"Admin":    true,
+				})
+			})
 			s.Run()
 			return nil
 		},
