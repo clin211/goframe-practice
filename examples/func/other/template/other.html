@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>剩下的其他方法</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        thead {
+            background-color: #f7fafc;
+            /* 表头背景色 */
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #edf2f7;
+            /* 奇数行背景色 */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mx-auto px-4 py-2">
+        <h2 class="text-xl font-bold mb-4">len 方法</h2>
+        <p>len 方法返回 string--{{.len.string }} 的长度：{{len .len.string}}</p>
+        <p>len 方法返回 slice--{{.len.slice}} 的长度：{{len .len.slice}}</p>
+        <p>len 方法返回 map--{{.len.map}} 的长度：{{len .len.map}}</p>
+        <p>len 方法返回 array--{{.len.array}} 的长度：{{len .len.array}}</p>
+        <p>len 方法返回 chan--{{printf "%T" .len.chan}} 的长度：{{len .len.chan}}</p>
+    </div>
+
+    <div class="container mx-auto px-4 py-2">
+        <h2 class="text-xl font-bold mb-4">not 方法</h2>
+        {{if not .len.string}}
+        <p>.len.string 的值为空</p>
+        {{else}}
+        <p>.len.string 的值为：{{.len.string}}</p>
+        {{end}}
+    </div>
+
+    <div class="container mx-auto px-4 py-2">
+        <h2 class="text-xl font-bold mb-4">or 方法</h2>
+        <p>{{or (len .len.chan) .len.string}}</p>
+    </div>
+
+    <div class="container mx-auto px-4 py-2">
+        <h2 class="text-xl font-bold mb-4">print/printf/println 方法</h2>
+        <p>{{print .len.string}}</p>
+        <p>{{printf "%v" .len.string}}</p>
+        <p>{{println .len.string}}</p>
+    </div>
+
+    <div class="container mx-auto px-4 py-2">
+        <h2 class="text-xl font-bold mb-4">eq/ne/lt/le/gt/ge 方法</h2>
+        <table class="w-full table-auto rounded-lg border-collapse table">
+            <thead class="text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr class="text-gray-800 border border-gray-400">
+                    <th class="px-4 py-2 border border-gray-400">Operation</th>
+                    <th class="px-4 py-2 border border-gray-400">description</th>
+                    <th class="px-4 py-2 border border-gray-400">Example</th>
+                    <th class="px-4 py-2 border border-gray-400">Result</th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-700">
+                <tr>
+                    <td class="px-4 py-2 border border-gray-400">eq</td>
+                    <td class="px-4 py-2 border border-gray-400">"a" == "a"</td>
+                    <td class="px-4 py-2 border border-gray-400">eq "a" "a"</td>
+                    <td class="px-4 py-2 border border-gray-400">{{eq "a" "a"}}</td>
+                </tr>
+                <tr>
+                    <td class="px-4 py-2 border border-gray-400">eq</td>
+                    <td class="px-4 py-2 border border-gray-400">"1" == "1"</td>
+                    <td class="px-4 py-2 border border-gray-400">eq "1" "1"</td>
+                    <td class="px-4 py-2 border border-gray-400">{{eq "1" "1"}}</td>
+                </tr>
+                <tr>
+                    <td class="px-4 py-2 border border-gray-400">eq</td>
+                    <td class="px-4 py-2 border border-gray-400">1 == 1</td>
+                    <td class="px-4 py-2 border border-gray-400">eq 1 "1"</td>
+                    <td class="px-4 py-2 border border-gray-400">{{eq 1 "1"}}</td>
+                </tr>
+
+                <tr>
+                    <td class="px-4 py-2 border border-gray-400">ne</td>
+                    <td class="px-4 py-2 border border-gray-400">"1" != "1"</td>
+                    <td class="px-4 py-2 border border-gray-400">ne 1 "1"</td>
+                    <td class="px-4 py-2 border border-gray-400">{{ne 1 "1"}}</td>
+                </tr>
+                <tr>
+                    <td class="px-4 py-2 border border-gray-400">ne</td>
+                    <td class="px-4 py-2 border border-gray-400">"a" != "a"</td>
+                    <td class="px-4 py-2 border border-gray-400">ne "a" "a"</td>
+                    <td class="px-4 py-2 border border-gray-400">{{ne "a" "a"}}</td>
+                </tr>
+                <tr>
+                    <td class="px-4 py-2 border border-gray-400">ne</td>
+                    <td class="px-4 py-2 border border-gray-400">"a" != "b"</td>
+                    <td class="px-4 py-2 border border-gray-400">ne "a" "b"</td>
+                    <td class="px-4 py-2 border border-gray-400">{{ne "a" "b"}}</td>
+                </tr>
+
+                <tr>
+                    <td class="px-4 py-2 border border-gray-400">lt</td>
+                    <td class="px-4 py-2 border border-gray-400">"1" < "2" </td>
+                    <td class="px-4 py-2 border border-gray-400">lt 1 "2"</td>
+                    <td class="px-4 py-2 border border-gray-400">{{lt 1 "2"}}</td>
+                </tr>
+                <tr>
+                    <td class="px-4 py-2 border border-gray-400">lt</td>
+                    <td class="px-4 py-2 border border-gray-400">2 < 2</td>
+                    <td class="px-4 py-2 border border-gray-400">lt 2 2</td>
+                    <td class="px-4 py-2 border border-gray-400">{{lt 2 2}}</td>
+                </tr>
+                <tr>
+                    <td class="px-4 py-2 border border-gray-400">lt</td>
+                    <td class="px-4 py-2 border border-gray-400">"a" < "b" </td>
+                    <td class="px-4 py-2 border border-gray-400">lt "a" "b"</td>
+                    <td class="px-4 py-2 border border-gray-400">{{le "a" "b"}}</td>
+                </tr>
+                <tr>
+                    <td class="px-4 py-2 border border-gray-400">ge</td>
+                    <td class="px-4 py-2 border border-gray-400">"1" >= "2"</td>
+                    <td class="px-4 py-2 border border-gray-400">ge 1 "2"</td>
+                    <td class="px-4 py-2 border border-gray-400">{{ge 1 "2"}}</td>
+                </tr>
+                <tr>
+                    <td class="px-4 py-2 border border-gray-400">ge</td>
+                    <td class="px-4 py-2 border border-gray-400">2 >= 1</td>
+                    <td class="px-4 py-2 border border-gray-400">ge 2 1</td>
+                    <td class="px-4 py-2 border border-gray-400">{{ge 2 1}}</td>
+                </tr>
+                <tr>
+                    <td class="px-4 py-2 border border-gray-400">ge</td>
+                    <td class="px-4 py-2 border border-gray-400">"a" >= "a"</td>
+                    <td class="px-4 py-2 border border-gray-400">ge "a" "a"</td>
+                    <td class="px-4 py-2 border border-gray-400">{{ge "a" "a"}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
