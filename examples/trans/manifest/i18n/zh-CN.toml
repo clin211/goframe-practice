@@ -1,0 +1,6 @@
+hello = "你好，世界！"
+welcome = "欢迎使用 GoFrame"
+
+[home]
+title = "首页"
+welcomeMessage = "欢迎来到首页！"
