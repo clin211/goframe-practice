@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+</head>
+
+<body>
+    <p>读取 map `{{.Map}}` 的 key 值:{{index .Map "key"}}</p>
+    <p>读取 slice `{{.Slice}}` 的第一个值:{{index .Slice 0}}</p>
+    <p>读取 array `{{.Array}}` 的第一个值:{{index .Array 0}}</p>
+    <p>读取 string `{{.String}}` 的第二个值:{{printf "%c" (index .String 1)}}</p>
+</body>
+
+</html>
